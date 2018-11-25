@@ -1,38 +1,58 @@
 #include<reg51.h>
 
-sbit Rp=P2^1;
-sbit Rn=P2^0;
-sbit Lp=P2^3;
-sbit Ln=P2^2;
+sbit RAC = P2^1;
+sbit RCW = P2^0;
+sbit LAC = P2^3;
+sbit LCW = P2^2;
 
 void main() {
 	P1=0xFF;
 	P2=0xFF;
 	while(1) {
-		if(P1==0xF2) {
-			Rp=0; Rn=1;
-			Lp=1; Ln=0;
+		if(P1==0xF1) {
+			RAC=0; RCW=1;
+			LAC=1; LCW=1;
+			while(P1==0xF1);
+		}
+		else if(P1==0xF2) {
+			RAC=0; RCW=1;
+			LAC=1; LCW=0;
 			while(P1==0xF2);
 		}
-		else if(P1==0xF8) {
-			Rp=1; Rn=0;
-			Lp=0; Ln=1;
-			while(P1==0xF8);
-		}
-		else if(P1==0xF5) {
-			Rp=1; Rn=1;
-			Lp=1; Ln=1;
-			while(P1==0xF5);
+		else if(P1==0xF3) {
+			RAC=1; RCW=1;
+			LAC=1; LCW=0;
+			while(P1==0xF3);
 		}
 		else if(P1==0xF4) {
-			Rp=1; Rn=0;
-			Lp=1; Ln=0;
+			RAC=0; RCW=1;
+			LAC=0; LCW=1;
 			while(P1==0xF4);
 		}
+		else if(P1==0xF5) {
+			RAC=1; RCW=1;
+			LAC=1; LCW=1;
+			while(P1==0xF5);
+		}
 		else if(P1==0xF6) {
-			Rp=0; Rn=1;
-			Lp=0; Ln=1;
+			RAC=1; RCW=0;
+			LAC=1; LCW=0;
 			while(P1==0xF6);
+		}
+		else if(P1==0xF7) {
+			RAC=1; RCW=0;
+			LAC=1; LCW=1;
+			while(P1==0xF7);
+		}
+		else if(P1==0xF8) {
+			RAC=1; RCW=0;
+			LAC=0; LCW=1;
+			while(P1==0xF8);
+		}
+		else if(P1==0xF9) {
+			RAC=1; RCW=1;
+			LAC=0; LCW=1;
+			while(P1==0xF9);
 		}
 	}
 }
